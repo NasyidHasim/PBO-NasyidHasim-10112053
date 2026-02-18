@@ -1,12 +1,12 @@
 <?php
 class produk {
     public $pinjaman;
-    public $bunga;
+    public static $bunga = 10 ;
     public $lama;
     public static $denda = 0.0015;
     public $keterlambatan;
     public function Totalpinjaman(){
-        return $this->pinjaman + ($this->pinjaman /$this->bunga);
+        return $this->pinjaman + ($this->pinjaman / self::$bunga);
     }
     public function Angsuran(){
         return $this->Totalpinjaman() / $this->lama;
@@ -19,8 +19,7 @@ class produk {
 }
 }
 $produk1 = new produk();
-$produk1->pinjaman = htmlspecialchars($_POST['nama']);
-$produk1->bunga = htmlspecialchars($_POST['harga']);
+$produk1->pinjaman = htmlspecialchars($_POST['pinjaman']);
 $produk1->lama = htmlspecialchars($_POST['lama']);
 $produk1->keterlambatan = htmlspecialchars($_POST['keterlambatan']);
 
@@ -28,7 +27,7 @@ $produk1->keterlambatan = htmlspecialchars($_POST['keterlambatan']);
 echo "<h2>toko pegadaian syariah</h2>"."<br>";
 echo "____________________________________________________________"."<br>";
 echo "besar pinjaman :RP " . $produk1->pinjaman . "<br>";
-echo "besar bunga : " . $produk1->bunga . "%" . "<br>";
+echo "besar bunga : " . produk::$bunga . "%" . "<br>";
 echo "lama pinjaman : " . $produk1->lama . " bulan" . "<br>";
 echo "___________________________________________________________"."<br>";
 echo "Total pinjaman :RP " . $produk1->Totalpinjaman() . "<br>";
