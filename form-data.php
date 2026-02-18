@@ -8,11 +8,8 @@
     <h4>input data produk dengan denda keterlambatan</h4>
     <form action="proses.php" method="post">
         besar pinjaman:
-        <input type="text" name="nama"> <br>
+        <input type="text" name="pinjaman"> <br>
         
-        besar bunga:
-        <input type="number" name="harga"> <br>
-
         lama pinjaman:
         <input type="number" name="lama"> <br>
        
@@ -26,9 +23,6 @@
     <form action="proses2.php" method="post">
         besar pinjaman:
         <input type="text" name="nama"> <br>
-        
-        besar bunga:
-        <input type="number" name="harga"> <br>
 
         lama pinjaman:
         <input type="number" name="lama"> <br>
