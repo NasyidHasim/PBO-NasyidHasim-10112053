@@ -1,40 +1,64 @@
 <?php
-class produk {
-    public $pinjaman;
-    public static $bunga = 10 ;
-    public $lama;
-    public static $denda = 0.0015;
-    public $keterlambatan;
-    public function Totalpinjaman(){
-        return $this->pinjaman + ($this->pinjaman / self::$bunga);
-    }
-    public function Angsuran(){
-        return $this->Totalpinjaman() / $this->lama;
-    }
-    public function besar_denda(){
-        return $this->Angsuran() * ($this->keterlambatan * self::$denda);
-}
-    Public function angsuran_denda(){
-        return $this->Angsuran() + $this->besar_denda();
-}
-}
-$produk1 = new produk();
-$produk1->pinjaman = htmlspecialchars($_POST['pinjaman']);
-$produk1->lama = htmlspecialchars($_POST['lama']);
-$produk1->keterlambatan = htmlspecialchars($_POST['keterlambatan']);
+// ====================================
+// CLASS MAHASISWA (OOP)
+// ====================================
+class Mahasiswa {
+    public $nama;
+    public $kelas;
+    public $matkul;
+    public $nilai;
 
+    public function __construct($nama, $kelas, $matkul, $nilai) {
+        $this->nama  = $nama;
+        $this->kelas = $kelas;
+        $this->matkul = $matkul;
+        $this->nilai = $nilai;
+    }
 
-echo "<h2>toko pegadaian syariah</h2>"."<br>";
-echo "____________________________________________________________"."<br>";
-echo "besar pinjaman :RP " . $produk1->pinjaman . "<br>";
-echo "besar bunga : " . produk::$bunga . "%" . "<br>";
-echo "lama pinjaman : " . $produk1->lama . " bulan" . "<br>";
-echo "___________________________________________________________"."<br>";
-echo "Total pinjaman :RP " . $produk1->Totalpinjaman() . "<br>";
-echo "besaran angsuran :RP " . $produk1->Angsuran() . "<br>";
-echo "____________________________________________________________"."<br>";
-echo "keterlambatan : " . $produk1->keterlambatan . " hari" . "<br>";
-echo "besaran denda :RP " . $produk1->besar_denda() . "<br>";
-echo "besaran angsuran + denda :RP " . $produk1->angsuran_denda() . "<br>";
-echo "============================================================"."<br>";
+    public function getStatus() {
+        return ($this->nilai >= 60) ? "Lulus Kuis" : "Tidak Lulus Kuis";
+    }
+}
+
+// ====================================
+// PROSES DATA DARI FORM
+// ====================================
+
+if (isset($_POST['submit'])) {
+
+    $data = []; // array penampung objek mahasiswa
+
+    // Loop untuk setiap data input mahasiswa
+    for ($i = 0; $i < count($_POST['nama']); $i++) {
+
+        // Cek jika nama kosong → skip
+        if (!empty($_POST['nama'][$i])) {
+            
+            // Buat object Mahasiswa per index
+            $mhs = new Mahasiswa(
+                $_POST['nama'][$i],
+                $_POST['kelas'][$i],
+                $_POST['matkul'][$i],
+                $_POST['nilai'][$i]
+            );
+
+            // Masukkan ke array
+            $data[] = $mhs;
+        }
+    }
+
+    // ==============================
+    // TAMPILKAN OUTPUT
+    // ==============================
+    echo "<h2>Data Nilai Mahasiswa</h2>";
+
+    foreach ($data as $mhs) {
+        echo "Nama : " . $mhs->nama . "<br>";
+        echo "Kelas : " . $mhs->kelas . "<br>";
+        echo "Mata Kuliah : " . $mhs->matkul . "<br>";
+        echo "Nilai : " . $mhs->nilai . "<br>";
+        echo $mhs->getStatus();
+        echo "<hr>";
+    }
+}
 ?>
