@@ -1,45 +1,34 @@
-<html>
-    <head>
-        <title>Belajar OOP - form produk</title>
-    </head>
-    <body>
-        <h2>input data produk</h2>
-        <form method="post" action="proses.php">
+<?php include "class_employee.php"; ?>
 
-        Nama Mahasiswa :
-        <input type="text" name="nama[]"><br><br>
-        Kelas          :
-        <input type="text" name="kelas[]"><br><br>
-        Mata Kuliah    :
-        <input type="text" name="matkul[]"><br><br>
-        Nilai          : 
-        <input type="text" name="nilai[]"><br><br>
-         
+<h2>Input Data Karyawan</h2>
 
-        <h2>jika ingin membuat lagi silahkan tulis</h2>
-        
-        Nama Mahasiswa :
-        <input type="text" name="nama[]"><br><br>
-        Kelas          :
-        <input type="text" name="kelas[]"><br><br>
-        Mata Kuliah    :
-        <input type="text" name="matkul[]"><br><br>
-        Nilai          : 
-        <input type="text" name="nilai[]"><br><br>
-          
-        <h2>jika ingin membuat lagi silahkan tulis</h2>
-        
-        Nama Mahasiswa :
-        <input type="text" name="nama[]"><br><br>
-        Kelas          :
-        <input type="text" name="kelas[]"><br><br>
-        Mata Kuliah    :
-        <input type="text" name="matkul[]"><br><br>
-        Nilai          : 
-        <input type="text" name="nilai[]"><br><br>
-        
-        <button type="submit" name="submit">kirim</button>
-        </form>
+<form method="post">
+    <label>Nama:</label><br>
+    <input type="text" name="nama" required><br><br>
 
-    </body>
-</html>
+    <label>Gaji Pokok:</label><br>
+    <input type="number" name="gaji" required><br><br>
+
+    <label>Lama Kerja (tahun):</label><br>
+    <input type="number" name="lama" required><br><br>
+
+    <label>Pilih Jabatan:</label><br>
+    <select name="jabatan" required>
+        <option value="programmer">Programmer</option>
+        <option value="direktur">Direktur</option>
+        <option value="mingguan">Pegawai Mingguan</option>
+    </select>
+    <br><br>
+
+    <!-- BAGIAN KHUSUS PEGAWAI MINGGUAN -->
+    <div style="border:1px solid #ccc; padding:10px; width:300px;">
+        <h4>Untuk Pegawai Mingguan</h4>
+        Harga Barang: <input type="number" name="harga"><br><br>
+        Stock Barang: <input type="number" name="stock"><br><br>
+        Terjual: <input type="number" name="terjual"><br><br>
+    </div>
+
+    <button type="submit">Proses</button>
+</form>
+
+
